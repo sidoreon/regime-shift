@@ -6,3 +6,4 @@ fredapi
 python-dotenv
 jupyter
 hmmlearn
+cvxpy
