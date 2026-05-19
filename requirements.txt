@@ -5,3 +5,4 @@ yfinance
 fredapi
 python-dotenv
 jupyter
+hmmlearn

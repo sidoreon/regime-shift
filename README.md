@@ -1,23 +1,55 @@
 # Regime Shift
 
-Market data pipeline for regime analysis (SPY, TLT, GLD, VIX).
+Hidden Markov Model regime detection on multi-asset market data (SPY, TLT, GLD, synthetic cash) with FRED macro features.
 
 ## Setup
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-cp .env.example .env   # add your FRED API key if using FRED
+cp .env.example .env        # add your FRED API key
 ```
 
-Open this folder as the workspace root in Cursor/VS Code (see `.vscode/settings.json` for notebook paths).
+Get a free API key at [FRED](https://fred.stlouisfed.org/docs/api/api_key.html).
 
-## Data
+Open this folder as the workspace root in Cursor/VS Code (`.vscode/settings.json` sets the notebook working directory).
 
-Run `notebooks/datapipeline.ipynb` to download prices and write outputs:
+## Notebooks
 
-- `data/raw/` — raw downloads
-- `data/processed/` — log returns, simple returns, VIX
+Run in order:
 
-CSV files are gitignored; regenerate locally after clone.
+| Notebook | Purpose |
+|----------|---------|
+| `notebooks/datapipeline.ipynb` | Download prices (yfinance), pull FRED macro series, build synthetic CASH from 1M T-bill yield, merge modeling dataset |
+| `notebooks/hmmregimedetection.ipynb` | Fit Gaussian HMM on processed features for regime detection |
+
+## Data layout
+
+Generated locally (CSVs are gitignored; rerun notebooks after clone):
+
+```
+data/
+  raw/
+    prices.csv      # ETF/index close prices
+    rawmacro.csv    # FRED series (yield spread, CPI, unemployment, yields)
+  processed/
+    dataset.csv     # merged features for HMM (log returns, VIX, macro)
+    logrt.csv
+    simplert.csv
+    vix.csv
+    cashprice.csv
+```
+
+`dataset.csv` columns: `SPYlogret`, `TLTlogret`, `GLDlogret`, `CASHlogret`, `VIX`, `YIELDSPREAD`, `UNRATE`, `DGS10`, `CPIYOY`.
+
+## Project structure
+
+```
+regime-shift/
+  notebooks/          # pipeline + HMM notebooks
+  data/raw/           # raw downloads
+  data/processed/     # model-ready outputs
+  requirements.txt
+  .env.example        # FRED_API_KEY template (copy to .env)
+```
