@@ -1,0 +1,20 @@
+# secrets
+.env
+
+# generated data (rebuild via notebooks/datapipeline.ipynb)
+data/**/*.csv
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env.local
+
+# jupyter
+.ipynb_checkpoints/
+
+# os / editor
+.DS_Store
+.idea/
+*.swp
