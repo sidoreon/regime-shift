@@ -1,6 +1,6 @@
 # Regime Shift
 
-Multi-asset market regime detection with a Gaussian Hidden Markov Model, then regime-conditioned convex portfolio optimization on SPY, TLT, GLD, and synthetic cash, using FRED macro features.
+Multi-asset market regime detection with a Gaussian Hidden Markov Model, then regime-conditioned convex portfolio optimisation on SPY, TLT, GLD, and synthetic cash, using FRED macro features.
 
 ## Setup
 
@@ -23,13 +23,13 @@ Run in order:
 |----------|---------|
 | `notebooks/datapipeline.ipynb` | Download ETF prices (yfinance), pull FRED macro series, build synthetic CASH from 1M T-bill yield, export modeling dataset and return series |
 | `notebooks/hmmregimedetection.ipynb` | Fit a 3-state Gaussian HMM on standardized features (`SPYlogret`, `SPYvol21d`, `vix`, `yieldspread`, `unrate`); label states as **Crisis**, **Recovery**, and **Bullish** via profile matching; export daily regime probabilities |
-| `notebooks/portfoliooptimization.ipynb` | Ledoit–Wolf covariance; min-variance and max-Sharpe solvers (cvxpy); per-regime μ/Σ and optimal weights; blend portfolios by HMM probabilities; plot dynamic allocation vs regime probabilities |
+| `notebooks/portfoliooptimisation.ipynb` | Ledoit–Wolf covariance; min-variance and max-Sharpe solvers (cvxpy); per-regime μ/Σ and optimal weights; blend portfolios by HMM probabilities; plot dynamic allocation vs regime probabilities |
 
 ### HMM regimes
 
 The middle state is **Recovery** (post-crisis rally, elevated unemployment, steep yield curve), not a classic bear market. Labeling uses three economic profiles scored against each raw HMM state mean. The model is fit with `random_state=42` for reproducibility.
 
-### Portfolio optimization
+### Portfolio optimisation
 
 - **Baseline strategies** on a rolling 252-day window: min variance, max Sharpe, equal weight.
 - **Regime-conditioned**: estimate μ and Σ separately per regime (fallback to pooled estimates when a regime has too few days), solve min-var and max-Sharpe per regime, then blend weights each day with `pcrisis`, `precovery`, `pbull` from the HMM.
@@ -65,7 +65,7 @@ regime-shift/
   notebooks/
     datapipeline.ipynb
     hmmregimedetection.ipynb
-    portfoliooptimization.ipynb
+    portfoliooptimisation.ipynb
   data/raw/
   data/processed/
   requirements.txt
