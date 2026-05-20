@@ -7,4 +7,4 @@ python-dotenv
 jupyter
 hmmlearn
 cvxpy
-sklearn
+scikit-learn
