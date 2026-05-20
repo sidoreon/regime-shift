@@ -4,9 +4,9 @@ Created by Sidharth Valsan, inspired from the Problem Statement provided in the 
 
 A dynamic multi-asset allocation system that uses unsupervised machine learning to detect unobservable economic regimes and shifts portfolio weights between equities, fixed income, gold, and cash based on the inferred market state. The full pipeline is built from scratch — data ingestion through walk-forward validation — with no look-ahead bias and explicit transaction cost modelling.
 
-**Backtest period:** February 2009 – December 2024 (16 years, fully out-of-sample)
-**Universe:** SPY (equities), TLT (long Treasuries), GLD (gold), synthetic CASH (1-month T-bill)
-**Rebalance:** Monthly, with 10 bps per-rebalance transaction cost
+- **Backtest period:** February 2009 – December 2024 (16 years, fully out-of-sample) 
+- **Universe:** SPY (equities), TLT (long Treasuries), GLD (gold), synthetic CASH (1-month treasury bill) 
+- **Rebalance:** Monthly, with 10 bps per-rebalance transaction cost
 
 ---
 
